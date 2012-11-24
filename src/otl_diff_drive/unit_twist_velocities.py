@@ -8,33 +8,52 @@ import unittest
 class TestTwistVelocityConverter(unittest.TestCase):
     def test_convert_straight(self):
         converter = twist_velocities.Converter(0.1, 0.5)
-        l, r = converter.convert(0.2, 0.0)
+        l, r = converter.twist_to_wheels(0.2, 0.0)
         self.assertAlmostEqual(l, 2.0)
         self.assertAlmostEqual(r, 2.0)
 
+    def test_inverse_convert_straight(self):
+        converter = twist_velocities.Converter(0.1, 0.5)
+        x, theta = converter.wheels_to_twist(2.0, 2.0)
+        self.assertAlmostEqual(x, 0.2)
+        self.assertAlmostEqual(theta, 0.0)
+
     def test_convert_rotate(self):
         converter = twist_velocities.Converter(0.1, 0.5)
-        l, r = converter.convert(0.0, 0.8)
+        l, r = converter.twist_to_wheels(0.0, 0.8)
         self.assertAlmostEqual(l, -4.0)
         self.assertAlmostEqual(r,  4.0)
 
     def test_direction_convert_rotate(self):
         converter = twist_velocities.Converter(0.1, 0.5, right_direction=-1)
-        l, r = converter.convert(0.0, 0.8)
+        l, r = converter.twist_to_wheels(0.0, 0.8)
         self.assertAlmostEqual(l, -4.0)
         self.assertAlmostEqual(r, -4.0)
 
     def test_direction_convert_straight(self):
         converter = twist_velocities.Converter(0.1, 0.5, left_direction=-1)
-        l, r = converter.convert(0.0, 0.8)
+        l, r = converter.twist_to_wheels(0.0, 0.8)
         self.assertAlmostEqual(l,  4.0)
         self.assertAlmostEqual(r,  4.0)
 
+    def test_direction_inverse_convert_straight(self):
+        converter = twist_velocities.Converter(0.1, 0.5, left_direction=-1)
+        x, theta = converter.wheels_to_twist(4.0, 4.0)
+        self.assertAlmostEqual(x, 0.0)
+        self.assertAlmostEqual(theta, 0.8)
+
     def test_convert_arc(self):
         converter = twist_velocities.Converter(0.1, 0.5)
-        l, r = converter.convert(0.5, 0.8)
+        l, r = converter.twist_to_wheels(0.5, 0.8)
         self.assertAlmostEqual(l, 1.0)
         self.assertAlmostEqual(r, 9.0)
+
+    def test_inverse_convert_arc(self):
+        converter = twist_velocities.Converter(0.1, 0.5)
+        x, theta = converter.wheels_to_twist(1.0, 9.0)
+        self.assertAlmostEqual(x, 0.5)
+        self.assertAlmostEqual(theta, 0.8)
+
 
 class TestAccelFilter(unittest.TestCase):
     def setUp(self):

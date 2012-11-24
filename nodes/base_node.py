@@ -45,7 +45,7 @@ class BaseNode:
         if self._current_velocity:
             limited_x, limited_theta = self._velocity_filter.filter(self._current_velocity.linear.x, self._current_velocity.angular.z)
             x, theta = self._accel_filter.filter(limited_x, limited_theta, 1.0 / self._rate)
-            l, r = self._twist_converter.convert(x, theta)
+            l, r = self._twist_converter.twist_to_wheels(x, theta)
             self._wheel_pub.publish(l, r)
 
     def stop(self):
@@ -67,5 +67,6 @@ class BaseNode:
 
 if __name__ == '__main__':
     rospy.init_node('base_node')
+    from otl_diff_drive import dynamixel
     node = BaseNode(dynamixel.Publisher())
     node.main()

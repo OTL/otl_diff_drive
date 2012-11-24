@@ -14,12 +14,20 @@ class Converter:
         self.left_direction = left_direction
         self.right_direction = right_direction
 
-    def convert(self, vel_x, vel_theta):
+    def twist_to_wheels(self, vel_x, vel_theta):
         ts = vel_x
         tw = vel_theta * self.wheel_offset
         vel_l = (ts - tw) / self.wheel_radius
         vel_r = (ts + tw) / self.wheel_radius
         return (vel_l * self.left_direction, vel_r * self.right_direction)
+    def wheels_to_twist(self, vel_l, vel_r):
+        ts_minus_tw = (vel_l * self.left_direction) * self.wheel_radius
+        ts_plus_tw  = (vel_r * self.right_direction) * self.wheel_radius
+        ts = (ts_minus_tw + ts_plus_tw) / 2.0
+        tw = ts_plus_tw - ts
+        vel_x = ts
+        vel_theta = tw / self.wheel_offset
+        return (vel_x, vel_theta)
 
 def calc_filtered_velocity(target_vel, current_vel, limit_accel, duration):
     accel = (target_vel - current_vel) / duration
