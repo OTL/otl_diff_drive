@@ -63,7 +63,7 @@ class VelocityFilter:
                         if not isStopVelocity(self._output_velocity):
                             # then repeat publish
                             self.publish()
-                r.sleep()
+            r.sleep()
 
 
 if __name__ == '__main__':
