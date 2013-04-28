@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 
 import rospy
-import roslib
-roslib.load_manifest("otl_diff_drive")
 
 import tf
 

@@ -1,0 +1,31 @@
+<package>
+  <name>otl_diff_drive</name>
+  <version>0.2.0</version>
+  <description>differential_drive for dynamixel_motors stack and so on...</description>
+  <maintainer email="t.ogura@gmail.com">Takashi Ogura</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/otl_diff_drive</url>
+  <url type="bugtracker">http://github.com/OTL/otl_diff_drive</url>
+
+  <author>Takashi Ogura</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>dynamixel_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>tf</build_depend>
+
+  <run_depend>dynamixel_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <export>
+
+  </export>
+</package>
