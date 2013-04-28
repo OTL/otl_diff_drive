@@ -1,16 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(otl_diff_drive)
-find_package(catkin REQUIRED
-  COMPONENTS
-  dynamixel_msgs std_msgs rospy geometry_msgs nav_msgs tf)
+find_package(catkin REQUIRED)
 
 catkin_python_setup()
 
 catkin_package(
-    DEPENDS
     CATKIN_DEPENDS dynamixel_msgs std_msgs rospy geometry_msgs nav_msgs tf
-    INCLUDE_DIRS # TODO include
-    LIBRARIES # TODO
 )
 
 install(PROGRAMS
